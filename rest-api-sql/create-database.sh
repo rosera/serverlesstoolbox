@@ -4,9 +4,9 @@
 # database, paste in the contents of the file load-data.sql. This will load
 # some test data into the database.
 
-PROJECT_ID=serverless-toolbox
-ROOT_PASSWORD=qwerty
-INSTANCE_NAME=mydb
+PROJECT_ID=[YOUR GCP PROJECT ID FROM THE CLOUD CONSOLE]
+ROOT_PASSWORD=[DECIDE ON A ROOT PASSWORD]
+INSTANCE_NAME=[DECIDE ON THE NAME OF YOUR CLOUD SQL INSTANCE/MACHINE]
 DB_NAME=pet-theory
 
 gcloud sql instances create $INSTANCE_NAME \

@@ -3,9 +3,9 @@
 # Using Postman or another REST API tool, you can POST new appointments,
 # search for appointments, and delete appointmenst.
 
-PROJECT_ID=serverless-toolbox
-ROOT_PASSWORD=qwerty
-INSTANCE_NAME=mydb
+PROJECT_ID=[YOUR GCP PROJECT ID FROM THE CLOUD CONSOLE]
+ROOT_PASSWORD=[COPY FROM create-database.sh]
+INSTANCE_NAME=[COPY FROM create-database.sh]
 DB_NAME=pet-theory
 
 gcloud builds submit --tag gcr.io/$PROJECT_ID/pet-theory-appointments \
