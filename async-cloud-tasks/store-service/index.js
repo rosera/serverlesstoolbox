@@ -1,3 +1,11 @@
+// The ID of the project where the queue has been defined.
+const PROJECT_ID = '';
+// The location of the payment service, like us-central1.
+const LOCATION = '';
+// Deploy the payment service, capture its URL, and enter it below.
+const PAYMENT_SERVICE_URL = 'https://payment-service...';
+const QUEUE_NAME = 'payments';
+
 const {v2beta3} = require('@google-cloud/tasks');
 const client = new v2beta3.CloudTasksClient();
 
@@ -28,7 +36,7 @@ function generateOrderId() {
 async function callPaymentService(order) {
   const task = {
     httpRequest: {
-      url: 'https://payment-service-weeju7u4zq-uc.a.run.app',
+      url: PAYMENT_SERVICE_URL,
       body: encodePayload(order),
       httpMethod: 'POST',
       headers: {'content-type': 'application/json'},
@@ -40,11 +48,8 @@ async function callPaymentService(order) {
       seconds: Date.now() / 1000 + 10,
     }
   };
-  const project = 'serverless-toolbox';
-  const location = 'us-west2';
-  const queue = 'payments';
   const request = {
-    parent: client.queuePath(project, location, queue),
+    parent: client.queuePath(PROJECT_ID, LOCATION, QUEUE_NAME),
     task: task,
   };
   const [response] = await client.createTask(request);
