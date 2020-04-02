@@ -8,13 +8,9 @@ admin.initializeApp( {
 
 let db = admin.firestore();
 
-function getDogs() {
-    db.collection( "dogs" ).get()
-    .then( querySnapshot => {
-        return querySnapshot.docs.map( doc => {
-            console.log( { id: doc.id, ...doc.data() } );
-            return { id: doc.id, ...doc.data() }
-        });
-    }
-    );
-};
+async function getDogs() {
+    let response = await db.collection( "dogs" ).get()
+    return response.docs.map( doc => {
+        return { id: doc.id, ...doc.data() }
+    })
+}
