@@ -6,7 +6,6 @@ const port = process.env.PORT || 8080;
 admin.initializeApp({
     credential: admin.credential.applicationDefault()
 });
-
 /* 
 The initializeApp function above will use the current project's Application Default
 Credentials.  You can specify a different service account by providing the service
@@ -19,7 +18,8 @@ admin.initializeApp({
 
 */
 const db = admin.firestore();
-
+app.use(express.static('admin'))
+app.use(express.urlencoded())
 app.listen(port, () => {
     console.log('BarkBark Rest API listening on port', port);
 });
@@ -43,4 +43,35 @@ app.get('/:breed', async (req, res) => {
         retVal = { status: 'fail', data: { title: `'${breed}' not found` } };
     }
     res.json(retVal)
+})
+
+async function addEntry(name, origin, lifeExpectancy, type) {
+    let data = {
+        name: name,
+        origin: origin,
+        life_expectancy: lifeExpectancy,
+        type: type
+    };
+    try {
+        let setDoc = await db.collection('dogs').doc().set(data);
+        return setDoc;
+    } catch (err) {
+        console.log(err)
+        throw new Error("Error")
+    }
+}
+
+app.post('/add', async (req, res) => {
+    const name = req.body.name
+    const origin = req.body.origin
+    const lifeExpectancy = req.body.lifeExpectancy
+    const type = req.body.type
+    try {
+        entryOut = await addEntry(name, origin, lifeExpectancy, type);
+        res.status(200).send(`Success: Added ${name}`)
+        res.end()
+    } catch (err) {
+        res.status(401).send(`Error: Could not add ${name}`)
+        res.end()
+    }
 })
