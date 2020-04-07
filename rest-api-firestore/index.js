@@ -1,12 +1,23 @@
 const admin = require('firebase-admin');
 const express = require('express');
-const serviceAccount = require('./barkbark-key.json');
 const app = express();
 const port = process.env.PORT || 8080;
 
 admin.initializeApp({
+    credential: admin.credential.applicationDefault()
+});
+
+/* 
+The initializeApp function above will use the current project's Application Default
+Credentials.  You can specify a different service account by providing the service
+account key in a json file and initializing with that instead:
+ 
+const serviceAccount = require('./barkbark-key.json');
+admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
+
+*/
 const db = admin.firestore();
 
 app.listen(port, () => {
