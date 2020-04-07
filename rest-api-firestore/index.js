@@ -49,7 +49,7 @@ async function addEntry(name, origin, lifeExpectancy, type) {
     let data = {
         name: name,
         origin: origin,
-        life_expectancy: lifeExpectancy,
+        life_expectancy: parseInt(lifeExpectancy),
         type: type
     };
     try {
