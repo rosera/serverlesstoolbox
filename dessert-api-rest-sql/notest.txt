@@ -1,0 +1,36 @@
+##### Install npm packages. #####
+
+npm install
+
+
+
+##### Build container in Cloud Build. #####
+
+PROJECT_ID=[copy your project's id from console.cloud.google.com]
+
+gcloud builds submit --tag gcr.io/$PROJECT_ID/desserts-api --project $PROJECT_ID
+
+
+
+##### Create test data in SQL database. #####
+
+# Open a connection to the database from Cloud Shell.
+
+use dessert_db;
+
+CREATE TABLE desserts (
+  id INT NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  calories INT NOT NULL,
+  rating INT NOT NULL,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO desserts (name, calories, rating)
+VALUES ('Apple crisp', 500, 2);
+
+INSERT INTO desserts (name, calories, rating)
+VALUES ('Banana split', 700, 4);
+
+INSERT INTO desserts (name, calories, rating)
+VALUES ('Cheesecake', 800, 3);
