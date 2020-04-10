@@ -18,8 +18,8 @@ admin.initializeApp({
 
 */
 const db = admin.firestore();
-app.use(express.static('admin'))
-app.use(express.urlencoded())
+app.use('/add', express.static('static'));
+app.use(express.urlencoded());
 app.listen(port, () => {
     console.log('BarkBark Rest API listening on port', port);
 });
