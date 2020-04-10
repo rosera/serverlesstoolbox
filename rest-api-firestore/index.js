@@ -45,33 +45,13 @@ app.get('/:breed', async (req, res) => {
     res.json(retVal)
 })
 
-async function addEntry(name, origin, lifeExpectancy, type) {
-    let data = {
-        name: name,
-        origin: origin,
-        life_expectancy: parseInt(lifeExpectancy),
-        type: type
-    };
-    try {
-        let setDoc = await db.collection('dogs').doc().set(data);
-        return setDoc;
-    } catch (err) {
-        console.log(err)
-        throw new Error("Error")
-    }
-}
-
 app.post('/add', async (req, res) => {
-    const name = req.body.name
-    const origin = req.body.origin
-    const lifeExpectancy = req.body.lifeExpectancy
-    const type = req.body.type
-    try {
-        entryOut = await addEntry(name, origin, lifeExpectancy, type);
-        res.status(200).send(`Success: Added ${name}`)
-        res.end()
-    } catch (err) {
-        res.status(401).send(`Error: Could not add ${name}`)
-        res.end()
+    const data = {
+        name: req.body.name,
+        origin: req.body.origin,
+        lifeExpectancy: req.body.lifeExpectancy,
+        type: req.body.type
     }
+    await db.collection('dogs').doc('TEST').set(data);
+    res.end()
 })
