@@ -2,7 +2,9 @@ const admin = require('firebase-admin');
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 8080;
+const bodyParser = require('body-parser');
 
+app.use(bodyParser.json())
 admin.initializeApp({
     credential: admin.credential.applicationDefault()
 });
@@ -35,13 +37,13 @@ app.get('/:breed', async (req, res) => {
     res.json(retVal)
 })
 
-app.post('/add', async (req, res) => {
+app.post('/', async (req, res) => {
     const data = {
         name: req.body.name,
         origin: req.body.origin,
         lifeExpectancy: req.body.lifeExpectancy,
         type: req.body.type
     }
-    await db.collection('dogs').doc('TEST').set(data);
-    res.end()
+    await db.collection('dogs').doc().set(data);
+    res.json({status: 'success', data: {dog: data}});
 })
