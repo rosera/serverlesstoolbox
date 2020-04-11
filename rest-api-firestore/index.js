@@ -24,24 +24,14 @@ app.listen(port, () => {
     console.log('BarkBark Rest API listening on port', port);
 });
 
-async function getBreed(breed) {
-    let dogsRef = db.collection("dogs");
-    let response = await dogsRef.where("name", "==", breed).get();
-    return response
-}
-
 app.get('/:breed', async (req, res) => {
-    const breed = req.params.breed;
-    const breedData = await getBreed(breed);
-    let retVal;
-    if (!breedData.empty) {
-        retVal = breedData.docs.map(doc => {
-            return { ...doc.data() }
-        })
-    } else {
-        res.status(404);
-        retVal = { status: 'fail', data: { title: `'${breed}' not found` } };
-    }
+    let breed = req.params.breed;
+    let dogsRef = db.collection('dogs');
+    let query = dogsRef.where('name', '==', breed);
+    let results = await query.get();
+    let retVal = results.docs.map(doc => {
+        return { ...doc.data() }
+    })
     res.json(retVal)
 })
 
