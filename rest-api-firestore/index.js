@@ -1,9 +1,8 @@
 const admin = require('firebase-admin');
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const app = express();
-app.use(bodyParser.json())
+app.use(express.json());
 const port = process.env.PORT || 8080;
 app.listen(port, () => {
     console.log(`BarkBark Rest API listening on port ${port}`);
