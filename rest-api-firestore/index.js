@@ -1,19 +1,18 @@
 const admin = require('firebase-admin');
 const express = require('express');
-const app = express();
-const port = process.env.PORT || 8080;
 const bodyParser = require('body-parser');
 
+const app = express();
 app.use(bodyParser.json())
+const port = process.env.PORT || 8080;
+app.listen(port, () => {
+    console.log('BarkBark Rest API listening on port', port);
+});
 
 admin.initializeApp({
     credential: admin.credential.applicationDefault()
 });
 const db = admin.firestore();
-
-app.listen(port, () => {
-    console.log('BarkBark Rest API listening on port', port);
-});
 
 app.get('/:breed', async (req, res) => {
     let breed = req.params.breed;
