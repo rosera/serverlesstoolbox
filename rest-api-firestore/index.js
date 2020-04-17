@@ -14,6 +14,11 @@ admin.initializeApp({
 });
 const db = admin.firestore();
 
+app.get('/', async (req, res) => {
+    res.json({status: 'Bark bark! Ready to roll.'});
+
+})
+
 app.get('/:breed', async (req, res) => {
     let breed = req.params.breed;
     let dogsRef = db.collection('dogs');
