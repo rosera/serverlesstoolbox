@@ -8,15 +8,15 @@ app.listen(port, () => {
     console.log(`BarkBark Rest API listening on port ${port}`);
 });
 
-admin.initializeApp({
-    credential: admin.credential.applicationDefault()
-});
-const db = admin.firestore();
-
 app.get('/', async (req, res) => {
     res.json({status: 'Bark bark! Ready to roll.'});
 
 })
+
+admin.initializeApp({
+    credential: admin.credential.applicationDefault()
+});
+const db = admin.firestore();
 
 app.get('/:breed', async (req, res) => {
     let breed = req.params.breed;
