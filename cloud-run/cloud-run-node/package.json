@@ -1,0 +1,16 @@
+{
+  "name": "cloud-run-node",
+  "version": "1.0.0",
+  "description": "Serverless Toolbox cloud run app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Rich Rose",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.1"
+  }
+}
