@@ -8,16 +8,16 @@ app = Flask(__name__)
 
 @app.route('/')
 def form():
-    return render_template('form.html')
+    return render_template('index.html')
 
 
-@app.route('/', methods=['POST'])
-def my_form_post():
-    milli = request.form['milli']
-    inches = round((float(milli) / 25.4), 4)
-    return render_template('form.html',
-                           milli=milli,
-                           inches=inches)
+#@app.route('/', methods=['POST'])
+#def my_form_post():
+#    milli = request.form['milli']
+#    inches = round((float(milli) / 25.4), 4)
+#    return render_template('form.html',
+#                           milli=milli,
+#                           inches=inches)
 
 
 if __name__ == "__main__":

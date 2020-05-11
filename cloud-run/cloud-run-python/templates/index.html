@@ -1,0 +1,30 @@
+<html>
+  <head>
+      <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/style.css')}}">
+      <title>Version: Python</title>
+  </head>
+  <body>
+    <div class="main-content">
+	    {% block header %}
+              {% include 'header.html' %} 
+	    {% endblock header %}
+      <form>
+        <input type="number"
+               name="milli"
+               step=".01"
+               min="0.01"
+               placeholder="Millimeters"
+	       maxlength="255"
+               required>
+        <input type="submit"
+               value="Convert">
+      </form>
+
+      <p id=conversion></p>
+    </div>
+    {% block footer %}
+      {% include 'footer.html' %} 
+    {% endblock %}
+    <script src="{{url_for('static', filename='scripts/app.js')}}"></script>
+  </body>
+</html>
