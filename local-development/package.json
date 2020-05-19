@@ -1,0 +1,18 @@
+{
+  "name": "local-development",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Bret McGowen",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@google-cloud/translate": "^5.3.0",
+    "express": "^4.17.1",
+    "knex": "^0.20.15",
+    "pg": "^8.0.2"
+  }
+}
