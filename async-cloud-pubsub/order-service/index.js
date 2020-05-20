@@ -18,7 +18,7 @@ app.post('/', async (req, res) => {
 
   await saveOrder(order);
   res.status(204).send();
-}
+})
 
 
 function decodeBase64Json(data) {
@@ -32,5 +32,3 @@ async function saveOrder(order) {
   console.log ('Writing to Db');
 //  await db.collection('orders').doc(id).set(order);
 }
-
-
