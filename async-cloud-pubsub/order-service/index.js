@@ -22,9 +22,7 @@ app.post('/', async (req, res) => {
 
 
 function decodeBase64Json(data) {
-  return JSON.parse(
-    Buffer.from(data, 'base64').toString();
-  );
+  return JSON.parse(Buffer.from(data, 'base64').toString());
 }
 
 async function saveOrder(order) {
