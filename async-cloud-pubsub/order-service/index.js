@@ -11,6 +11,8 @@ app.listen(port, () => {
 
 
 app.post('/', async (req, res) => {
+
+  console.log ('req.body: ' + req.body);
   const data = req.body.message.data;
   const order = decodeBase64Json(data);
 
