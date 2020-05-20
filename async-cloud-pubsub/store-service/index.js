@@ -17,7 +17,7 @@ app.listen(port, () => {
 app.post('/', async (req, res) => {
   const order = req.body;
   order.id = generateOrderId();
-//  await publishMessage(order);
+  await publishMessage(order);
   const retVal = {
     status: "success",
     order_id: order.id
