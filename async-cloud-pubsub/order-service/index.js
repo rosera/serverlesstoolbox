@@ -31,6 +31,6 @@ function decodeBase64Json(data) {
 
 async function saveOrder(order) {
   const id = order.id.toString();
-  console.log ('Writing to Db');
+  console.log ('Writing order to Db: ' + id);
 //  await db.collection('orders').doc(id).set(order);
 }
