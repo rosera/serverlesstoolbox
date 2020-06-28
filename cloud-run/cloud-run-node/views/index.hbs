@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="icon" href"/img/measure.png">
+  <title>Version: Node</title>
+</head>
+
+<body>
+  <div class="main-content">
+    {{>header}}
+    <form>
+      <input type="number"
+             name="milli"
+             step=".01"
+             min="0.01"
+             placeholder="Millimeters"
+	     maxlength="255"
+             required>
+     <input type="submit"
+            value="Convert">
+    </form>
+    <p id=conversion></p>
+  </div>
+  {{>footer}}
+  <script src="/scripts/app.js"></script>
+</body>
+</html>
