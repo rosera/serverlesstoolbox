@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pet Theory Appointments</title>
+    <script defer src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script defer src="init-firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <link type="text/css" rel="stylesheet" href="app.css" />
+    <script>
+      window.addEventListener('DOMContentLoaded', async function() {
+        firebase.auth().onAuthStateChanged(async function(user) {
+          if (user) {
+            // User is signed in.
+            document.getElementById('userName').innerText = user.displayName;
+            let userId = user.uid;
+            document.getElementById('userId').innerText = userId;
+            const idToken = await user.getIdToken();
+            const rawResponse = await fetch('/api/appointments?userId=' + userId, {
+              method: 'GET',
+              mode: 'cors',
+              headers: { 'authorization': idToken }
+            });
+            const response = await rawResponse.json();
+            if (response && response.data) {
+              let listAppts = document.getElementById('appointments');
+              listAppts.innerHTML = '';
+              response.data.appointments.forEach(appt => {
+                let timestamp = new Date(appt.start_ts * 1000);
+                listAppts.innerHTML += `<div>Clinic <b>${appt.clinic_id}</b>
+                  at <b>${timestamp.toLocaleTimeString()}</b></div>`;
+              });
+            }
+          } else {
+            // User is signed out.
+            window.location.href = '/';
+          }
+        }, function(error) {
+          console.error(error);
+        });
+      }); // end DOMContentLoaded event.
+    </script>
+  </head>
+  <body>
+    <div id="content">
+      <h1><img src="pet-theory.png" alt="Pet Theory logo" /></h1>
+      <h2>Appointments for <span id="userName"></span></h2>
+      <div id="appointments">
+        <!-- 
+          Appointments will be listed here.
+        -->
+      </div>
+      <div class="note">
+        User ID <span id="userId"></span>
+      </div>
+    </div>
+  </body>
+</html>
