@@ -1,0 +1,16 @@
+{
+  "name": "pet-theory-appointments",
+  "version": "1.0.0",
+  "description": "REST API to access Pet Theory appointments",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Bret McGowen",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase-admin": "^9.0.0",
+    "mysql": "^2.18.1"
+  }
+}

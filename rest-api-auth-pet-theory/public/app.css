@@ -1,0 +1,20 @@
+body {
+  font-family: Verdana, Roboto, sans-serif;
+  font-size: 16pt;
+  text-align: center;
+}
+
+h1 {
+  font-size: 22pt;
+  color: navy;
+}
+
+h1 img {
+  vertical-align: middle;
+}
+
+.note {
+  margin-top: 400px;
+  font-size: 6pt;
+  font-weight:100;
+}
