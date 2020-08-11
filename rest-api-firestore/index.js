@@ -10,7 +10,6 @@ app.listen(port, () => {
 
 app.get('/', async (req, res) => {
     res.json({status: 'Bark bark! Ready to roll.'});
-
 })
 
 admin.initializeApp({
@@ -19,14 +18,15 @@ admin.initializeApp({
 const db = admin.firestore();
 
 app.get('/:breed', async (req, res) => {
-    let breed = req.params.breed;
-    let dogsRef = db.collection('dogs');
-    let query = dogsRef.where('name', '==', breed);
-    let results = await query.get();
-    let retVal = results.docs.map(doc => {
-        return { ...doc.data() }
-    })
-    res.json(retVal)
+    const breed = req.params.breed;
+    const query = db.collection('dogs').where('name', '==', breed);
+    const querySnapshot = await query.get();
+    if (querySnapshot.size > 0) {
+        res.json(querySnapshot.docs[0].data());
+    }
+    else {
+        res.json({status: 'Not found'});
+    }
 })
 
 app.post('/', async (req, res) => {
