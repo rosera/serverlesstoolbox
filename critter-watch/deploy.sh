@@ -1,9 +1,9 @@
-GOOGLE_PROJECT_ID=critterwatch
+GOOGLE_PROJECT_ID=critterwatcher
 
 gcloud builds submit --tag gcr.io/$GOOGLE_PROJECT_ID/critterwatch-rest-api \
   --project=$GOOGLE_PROJECT_ID
 
-gcloud beta run deploy critterwatch-rest-api \
+gcloud run deploy critterwatch-rest-api \
   --image gcr.io/$GOOGLE_PROJECT_ID/critterwatch-rest-api \
   --platform managed \
   --region us-central1 \
