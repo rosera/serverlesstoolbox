@@ -13,11 +13,10 @@ app.get('/animals/:animalName', async (req, res) => {
   const querySnapshot = await firestore.collection(animalName).get();
   if (!querySnapshot.empty) {
     const sightings = querySnapshot.docs.map(doc => doc.data());
-    res.json({status: 'success', data: {sightings}});
+    res.json({status: 'success', data: {sightings: sightings}});
   } else {
     res.status(404).send({
-      status: 'failure',
-      data: {message: `'${animalName} not found.`}
+      status: 'failure', data: {message: `'${animalName}' not found`}
     });
   }
-});
+})
