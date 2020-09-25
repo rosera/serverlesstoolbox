@@ -4,7 +4,7 @@ const visionClient = new vision.ImageAnnotatorClient();
 const {Firestore} = require('@google-cloud/firestore');
 const firestore = new Firestore();
 
-const trackedAnimals = ['raccoon', 'alpaca', 'squirrel', 'red panda'];
+const trackedAnimals = ['raccoon', 'alpaca', 'peacock', 'dog', 'gecko', 'squirrel', 'red panda'];
 
 /**
  * Triggered from a change to a Cloud Storage bucket.
