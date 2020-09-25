@@ -1,6 +1,8 @@
-const admin = require('firebase-admin');
+const firebase = require('@google-cloud/firestore');
 const express = require('express');
 
+const Firestore = require('@google-cloud/firestore')
+const db = new Firestore();
 const app = express();
 app.use(express.json());
 const port = process.env.PORT || 8080;
@@ -11,11 +13,6 @@ app.listen(port, () => {
 app.get('/', async (req, res) => {
     res.json({status: 'Bark bark! Ready to roll.'});
 })
-
-admin.initializeApp({
-    credential: admin.credential.applicationDefault()
-});
-const db = admin.firestore();
 
 app.get('/:breed', async (req, res) => {
     const breed = req.params.breed;
