@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <title>
+      Dessert API client
+    </title>
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="google-signin-client_id" content="[GET THIS FROM THE CLOUD CONSOLE]">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+      
+      let userJwtToken;
+
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        document.getElementById('status').value = profile.getId();
+        userJwtToken  = googleUser.getAuthResponse().id_token;
+        console.log(userJwtToken);
+      }
+      function logOut() {
+        gapi.auth2.getAuthInstance().signOut();
+        userJwtToken = '';
+      }
+      async function findDessert() {
+        try {
+          const id = document.getElementById('id').value;
+          const response = await fetch(`/api/desserts/${id}`, {
+            method: 'GET',
+            headers: {'Authorization': 'Bearer ' + userJwtToken}
+          });
+          document.getElementById('status').value = response.status;
+          if (response.ok) {
+            const respObj = await response.json();
+            const dessert = respObj.data.dessert;
+            document.getElementById('name').value = dessert.name;
+            document.getElementById('calories').value = dessert.calories;
+            document.getElementById('rating').value = dessert.rating;
+          }
+        }
+        catch (ex) {
+          document.getElementById('status').value = ex.toString();
+        }
+      }
+      function clearFields() {
+        document.getElementById('id').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('calories').value = '';
+        document.getElementById('rating').value = '';
+        document.getElementById('status').value = '';
+      }
+    </script>
+  </head>
+  <body>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    Dessert ID <input id="id">
+    <button onclick="findDessert()">Find</button><br><br>
+    <hr>
+    Dessert Name <input id="name"><br><br>
+    Dessert Calories <input id="calories"><br><br>
+    Dessert Rating <input id="rating"><br><br>
+    Status <input id="status"><br><br>
+    <button onclick="clearFields()">Clear</button>
+    <button onclick="logOut()">Log out</button>
+  </body>
+</html>
